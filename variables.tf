@@ -1,11 +1,9 @@
-variable "project_name" {
-  default     = "default"
+variable "project_id" {
   type        = string
-  description = "Name of the project to deploy into"
+  description = "ID of the project to deploy into"
 }
 
 variable "instance_size" {
-  #default = "STARDUST1-S"
   default     = "DEV1-S"
   description = "Instance size to use"
 }
