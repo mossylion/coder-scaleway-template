@@ -22,6 +22,13 @@ resource "coder_agent" "main" {
     interval     = 10
     timeout      = 1
   }
+  metadata {
+    display_name = "Disk Usage"
+    key          = "1_disk_usage"
+    script       = "coder stat disk"
+    interval     = 10
+    timeout      = 1
+  }
 }
 
 # Use this to set environment variables in your workspace
@@ -53,19 +60,6 @@ resource "coder_script" "startup_script" {
   run_on_start       = true
   start_blocks_login = true
 }
-
-data "coder_parameter" "disk_size" {
-  name    = "Disk Size"
-  type    = "number"
-  default = "10"
-  order   = 8
-  validation {
-    min       = 10
-    max       = 50
-    monotonic = "increasing"
-  }
-}
-
 
 module "dotfiles" {
   count    = data.coder_workspace.me.start_count
